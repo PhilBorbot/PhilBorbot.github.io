@@ -177,6 +177,7 @@ $(document).ready(function(){
 
 	var winOne = false;
 	var winTwo = false;
+	var winAll = false;
 
 	var field_11 = $('input[name="field_11"]').attr('data') == '1';
 
@@ -208,7 +209,7 @@ $(document).ready(function(){
 
 		checkWin();
 
-		if (winOne === false && winTwo === false) {
+		if (winOne === false && winTwo === false && winAll === false) {
 			if ($('input[name=player]').attr('data') == 'one') {
 				changePlayerOne();
 				$('.table').attr('data', 'ready');
@@ -221,6 +222,9 @@ $(document).ready(function(){
 			newGame();
 		} else if(winTwo) {
 			alert('Выиграл игрок Два');
+			newGame();
+		} else if(winAll) {
+			alert('Победила дружба');
 			newGame();
 		}
 	}
@@ -248,6 +252,15 @@ $(document).ready(function(){
 				|| $('input[name="field_11"]').attr('data') == '2' && $('input[name="field_22"]').attr('data') == '2' && $('input[name="field_33"]').attr('data') == '2'
 				|| $('input[name="field_13"]').attr('data') == '2' && $('input[name="field_22"]').attr('data') == '2' && $('input[name="field_31"]').attr('data') == '2') {
 			winTwo = true;
+		} else if ($('input[name="field_11"]').attr('data') != '0' && $('input[name="field_12"]').attr('data') != '0' && $('input[name="field_13"]').attr('data') != '0'
+				&& $('input[name="field_21"]').attr('data') != '0' && $('input[name="field_22"]').attr('data') != '0' && $('input[name="field_23"]').attr('data') != '0'
+				&& $('input[name="field_31"]').attr('data') != '0' && $('input[name="field_32"]').attr('data') != '0' && $('input[name="field_33"]').attr('data') != '0'
+				&& $('input[name="field_11"]').attr('data') != '0' && $('input[name="field_21"]').attr('data') != '0' && $('input[name="field_31"]').attr('data') != '0'
+				&& $('input[name="field_12"]').attr('data') != '0' && $('input[name="field_22"]').attr('data') != '0' && $('input[name="field_32"]').attr('data') != '0'
+				&& $('input[name="field_13"]').attr('data') != '0' && $('input[name="field_23"]').attr('data') != '0' && $('input[name="field_33"]').attr('data') != '0'
+				&& $('input[name="field_11"]').attr('data') != '0' && $('input[name="field_22"]').attr('data') != '0' && $('input[name="field_33"]').attr('data') != '0'
+				&& $('input[name="field_13"]').attr('data') != '0' && $('input[name="field_22"]').attr('data') != '0' && $('input[name="field_31"]').attr('data') != '0') {
+			winAll = true;
 		}
 	}
 
