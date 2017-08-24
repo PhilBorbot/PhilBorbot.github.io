@@ -1,0 +1,269 @@
+﻿<!DOCTYPE html>
+<html>
+<head>
+	<meta charset="UTF-8">
+	<!-- <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script> -->
+	<script src="C:\Users\ph\Documents\Bootstrap\js\jquery-3.2.1.min.js"></script>
+	<title>Крестики-Нолики</title>
+<style>
+
+body {
+	background-color: #d5f5ff;
+}
+
+p {
+	margin: 0;
+}
+
+#blockWraper table {
+	width: 500px;
+	height: 500px;
+	margin: 0 auto;
+	margin-top: 5px;
+	border-collapse: collapse;
+}
+
+#blockWraper td {
+	border: 2px solid black;
+	text-align: center;
+	font-size: 100pt;
+	cursor: pointer;
+	width: 160px;
+	height: 160px;
+}
+
+.trOne {
+	width: 33%;
+}
+
+.trTwo {
+	width: 33%;
+}
+
+.trThree {
+	width: 33%;
+
+}
+
+.nameTwo .playerOne {
+	display: none;
+}
+
+.nameOne .playerTwo {
+	display: none;
+}
+
+.playerOne {
+	width: 500px;
+	margin: 0 auto;
+	text-align: left;
+	font-size: 18pt;
+	color: red;
+}
+
+.playerTwo {
+	width: 500px;
+	margin: 0 auto;
+	text-align: right;
+	font-size: 18pt;
+	color: blue;
+}
+
+.btnWrap {
+	width: 500px;
+	margin: 0 auto;
+}
+
+.changeOne #btn {
+	color: red;
+	border: 1px solid red;
+}
+
+.changeTwo #btn {
+	color: blue;
+	border: 1px solid blue;
+}
+
+#btn {
+	width: 500px;
+	border-radius: 10px;
+	height: 40px;
+	margin-top: 5px;
+	text-align: center;
+	font-size: 20pt;
+	font-weight: 700;
+	cursor: pointer;
+}
+
+:focus {
+	outline: none;
+}
+
+.cross {
+	color: red;
+}
+
+.circle {
+	color: blue;
+}
+
+.cross {
+	border-color: red;
+}
+
+.circle {
+	border-color: blue;
+}
+
+</style>
+</head>
+<body>
+
+<div id="blockWraper">
+
+<div class="name nameOne">
+	<p class="playerOne">Игрок 1</p>
+	<p class="playerTwo">Игрок 2</p>
+</div>
+
+<table class="table" collapse="0">
+<tr class="trOne">
+	<td class="td" data="11">
+	</td>
+	<td class="td" data="12">
+	</td>
+	<td class="td" data="13">
+	</td>
+</tr>
+<tr class="trTwo">
+	<td class="td" data="21">
+	</td>
+	<td class="td" data="22">
+	</td>
+	<td class="td" data="23">
+	</td>
+</tr>
+<tr class="trThree">
+	<td class="td" data="31">
+	</td>
+	<td class="td" data="32">
+	</td>
+	<td class="td" data="33">
+	</td>
+</tr>
+</table>
+
+<!-- <div class="btnWrap changeOne">
+	<button id="btn">
+		Я сходил!
+	</button>
+</div> -->
+<input type="hidden" name="player" data="one">
+<input type="hidden" name="field_11" data="0">
+<input type="hidden" name="field_12" data="0">
+<input type="hidden" name="field_13" data="0">
+<input type="hidden" name="field_21" data="0">
+<input type="hidden" name="field_22" data="0">
+<input type="hidden" name="field_23" data="0">
+<input type="hidden" name="field_31" data="0">
+<input type="hidden" name="field_32" data="0">
+<input type="hidden" name="field_33" data="0">
+</div>
+<script>
+$(document).ready(function(){
+
+	var cross = '<p class="cross">X</p>';
+	var circle = '<p class="circle">O</p>';
+
+	var winOne = false;
+	var winTwo = false;
+
+	var field_11 = $('input[name="field_11"]').attr('data') == '1';
+
+
+	$('td').click(function() {
+		var choise = $('input[name="field_'+ $(this).attr('data') +'"]');
+		if ($('.table').attr('data') != 'end') {
+			if ($('input[name=player]').attr('data') == 'one') {
+				if ($(choise).attr('data') == 0) {
+					$(choise).attr('data', 1);
+					$(this).append(cross).addClass('crossTd');
+					$('.table').attr('data', 'end');
+				}
+			} else {
+				if ($(choise).attr('data') == 0) {
+					$(choise).attr('data', 2);
+					$(this).append(circle).addClass('circleTd');
+					$('.table').attr('data', 'end');
+				}
+			}
+			next();
+		} else {
+			alert('Вы сделали свой ход!');
+		}
+
+	});
+
+	function next() {
+
+		checkWin();
+
+		if (winOne === false && winTwo === false) {
+			if ($('input[name=player]').attr('data') == 'one') {
+				changePlayerOne();
+				$('.table').attr('data', 'ready');
+			} else {
+				changePlayerTwo();
+				$('.table').attr('data', 'ready');
+			}
+		} else if(winOne) {
+			alert('Выиграл игрок Один');
+			newGame();
+		} else if(winTwo) {
+			alert('Выиграл игрок Два');
+			newGame();
+		}
+	}
+
+	function newGame() {
+		window.location = location.href;
+	}
+
+	function checkWin() {
+		if ($('input[name="field_11"]').attr('data') == '1' && $('input[name="field_12"]').attr('data') == '1' && $('input[name="field_13"]').attr('data') == '1'
+			|| $('input[name="field_21"]').attr('data') == '1' && $('input[name="field_22"]').attr('data') == '1' && $('input[name="field_23"]').attr('data') == '1'
+			|| $('input[name="field_31"]').attr('data') == '1' && $('input[name="field_32"]').attr('data') == '1' && $('input[name="field_33"]').attr('data') == '1'
+			|| $('input[name="field_11"]').attr('data') == '1' && $('input[name="field_21"]').attr('data') == '1' && $('input[name="field_31"]').attr('data') == '1'
+			|| $('input[name="field_12"]').attr('data') == '1' && $('input[name="field_22"]').attr('data') == '1' && $('input[name="field_32"]').attr('data') == '1'
+			|| $('input[name="field_13"]').attr('data') == '1' && $('input[name="field_23"]').attr('data') == '1' && $('input[name="field_33"]').attr('data') == '1'
+			|| $('input[name="field_11"]').attr('data') == '1' && $('input[name="field_22"]').attr('data') == '1' && $('input[name="field_33"]').attr('data') == '1'
+			|| $('input[name="field_13"]').attr('data') == '1' && $('input[name="field_22"]').attr('data') == '1' && $('input[name="field_31"]').attr('data') == '1') {
+			winOne = true;
+		} else if ($('input[name="field_11"]').attr('data') == '2' && $('input[name="field_12"]').attr('data') == '2' && $('input[name="field_13"]').attr('data') == '2'
+				|| $('input[name="field_21"]').attr('data') == '2' && $('input[name="field_22"]').attr('data') == '2' && $('input[name="field_23"]').attr('data') == '2'
+				|| $('input[name="field_31"]').attr('data') == '2' && $('input[name="field_32"]').attr('data') == '2' && $('input[name="field_33"]').attr('data') == '2'
+				|| $('input[name="field_11"]').attr('data') == '2' && $('input[name="field_21"]').attr('data') == '2' && $('input[name="field_31"]').attr('data') == '2'
+				|| $('input[name="field_12"]').attr('data') == '2' && $('input[name="field_22"]').attr('data') == '2' && $('input[name="field_32"]').attr('data') == '2'
+				|| $('input[name="field_13"]').attr('data') == '2' && $('input[name="field_23"]').attr('data') == '2' && $('input[name="field_33"]').attr('data') == '2'
+				|| $('input[name="field_11"]').attr('data') == '2' && $('input[name="field_22"]').attr('data') == '2' && $('input[name="field_33"]').attr('data') == '2'
+				|| $('input[name="field_13"]').attr('data') == '2' && $('input[name="field_22"]').attr('data') == '2' && $('input[name="field_31"]').attr('data') == '2') {
+			winTwo = true;
+		}
+	}
+
+	function changePlayerOne() {
+		$('.name').removeClass('nameOne').addClass('nameTwo');
+		$('.btnWrap').removeClass('changeOne').addClass('changeTwo');
+		$('input[name=player]').attr('data', 'two');
+	}
+
+	function changePlayerTwo() {
+		$('.name').removeClass('nameTwo').addClass('nameOne');
+		$('.btnWrap').removeClass('changeTwo').addClass('changeOne');
+		$('input[name=player]').attr('data', 'one');
+	}
+
+});
+</script>
+</body>
+</html>
