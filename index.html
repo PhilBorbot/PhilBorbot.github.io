@@ -218,18 +218,24 @@ $(document).ready(function(){
 				$('.table').attr('data', 'ready');
 			}
 		} else if(winOne) {
-			alert('Выиграл игрок Один');
-			newGame();
+			setTimeout(newGame, 1500, 'Один');
 		} else if(winTwo) {
-			alert('Выиграл игрок Два');
-			newGame();
+			setTimeout(newGame, 1500, 'Два');
 		} else if(winAll) {
-			alert('Победила дружба');
-			newGame();
+			setTimeout(newGame, 1500);
 		}
 	}
 
-	function newGame() {
+	function newGame(who) {
+		if(who == 'Один' || who == 'Два'){
+			alert('Победил игрок '+who+'');
+		}	else {
+			alert('Победила дружба');
+		}
+		restartGame();
+	}
+
+	function restartGame() {
 		window.location = location.href;
 	}
 
