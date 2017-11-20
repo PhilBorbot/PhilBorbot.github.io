@@ -1,0 +1,162 @@
+#page {
+   display: block;
+   background-image: url('/img/gray-bg.jpg');
+   margin: 20px;
+   box-shadow: 2px 2px 6px #000;
+}
+
+p {
+   margin: 0;
+}
+
+#container {
+   display: flex;
+   padding: 20px;
+   height: 87%;
+}
+
+p {
+  font-family: Comfortaa, cursive;
+  font-size: 4em;
+  text-align: center;
+  color: #fff;
+  margin: auto 0;
+  text-shadow: 1px 0px 1px white;
+}
+
+.startGame, .again {
+   cursor: pointer;
+   text-shadow: 1px 1px 2px black;
+}
+
+.whoWin {
+  text-shadow: 1px 1px 2px black;
+  padding-bottom: 30px;
+}
+
+#startPage, #endGame, #blockWraper {
+  margin: auto;
+}
+
+/*Стили для крестиков ноликов*/
+
+#blockWraper table {
+  margin: auto;
+  margin-top: 5px;
+  border-collapse: collapse;
+}
+
+#blockWraper table td.default {
+  cursor: default;
+}
+
+#blockWraper td {
+  text-align: center;
+  cursor: pointer;
+}
+
+#blockWraper tr.trOne td,
+#blockWraper tr.trTwo td {
+  border-bottom: 2px solid white;
+}
+
+
+#blockWraper tr.trOne td:first-child,
+#blockWraper tr.trTwo td:first-child,
+#blockWraper tr.trThree td:first-child {
+  border-right: 2px solid white;
+}
+
+#blockWraper tr.trOne td:last-child,
+#blockWraper tr.trTwo td:last-child,
+#blockWraper tr.trThree td:last-child {
+  border-left: 2px solid white;
+}
+
+#blockWraper tr .td_11,
+#blockWraper tr .td_12,
+#blockWraper tr .td_21,
+#blockWraper tr .td_22 {
+   box-shadow: 2px 2px 0px #8f8f8f;
+}
+
+#blockWraper tr .td_13,
+#blockWraper tr .td_23 {
+  box-shadow: 0px 2px 0px #8f8f8f;
+}
+
+#blockWraper tr .td_31,
+#blockWraper tr .td_32 {
+  box-shadow: 2px 0px 0px #8f8f8f;
+}
+
+
+.trOne {
+  width: 33%;
+}
+
+.trTwo {
+  width: 33%;
+}
+
+.trThree {
+  width: 33%;
+
+}
+
+.nameTwo .playerOne {
+  display: none;
+}
+
+.nameOne .playerTwo {
+  display: none;
+}
+
+.playerOne, .playerTwo {
+  width: 80%;
+  text-align: center;
+  white-space: pre;
+  font-size: 1.6em;
+  text-decoration-line: underline;
+  text-decoration-color: white;
+  text-decoration-style: dotted;
+}
+
+.whoPlayer {
+  font-size: 1.6em;
+  text-align: center;
+  margin: 0 auto;
+  padding-right: 10px;
+  float:left;
+  display: inline-block;
+}
+
+.playerOne, .cross {
+  color: red;
+}
+
+.playerTwo, .circle {
+  color: blue;
+}
+
+:focus {
+  outline: none;
+}
+
+.cross {
+  border-color: red;
+}
+
+.circle {
+  border-color: blue;
+}
+
+.copyright,
+.copyright a {
+  color: #252F34;
+  font-size: 1em;
+}
+
+.copyright a:hover {
+  color: #3b677d;
+}

@@ -1,320 +1,289 @@
-﻿<!DOCTYPE html>
+<!DOCTYPE HTML>
 <html>
 <head>
-	<meta charset="UTF-8">
-	<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
-	<!-- <script src="C:\Users\ph\Documents\Bootstrap\js\jquery-3.2.1.min.js"></script> -->
-
-	<!-- Yandex.Metrika counter -->
-	<script type="text/javascript" >
-	    (function (d, w, c) {
-	        (w[c] = w[c] || []).push(function() {
-	            try {
-	                w.yaCounter45732222 = new Ya.Metrika({
-	                    id:45732222,
-	                    clickmap:true,
-	                    trackLinks:true,
-	                    accurateTrackBounce:true,
-	                    webvisor:true,
-	                    ut:"noindex"
-	                });
-	            } catch(e) { }
-	        });
-
-	        var n = d.getElementsByTagName("script")[0],
-	            s = d.createElement("script"),
-	            f = function () { n.parentNode.insertBefore(s, n); };
-	        s.type = "text/javascript";
-	        s.async = true;
-	        s.src = "https://mc.yandex.ru/metrika/watch.js";
-
-	        if (w.opera == "[object Opera]") {
-	            d.addEventListener("DOMContentLoaded", f, false);
-	        } else { f(); }
-	    })(document, window, "yandex_metrika_callbacks");
-	</script>
-	<noscript><div><img src="https://mc.yandex.ru/watch/45732222?ut=noindex" style="position:absolute; left:-9999px;" alt="" /></div></noscript>
-	<!-- /Yandex.Metrika counter -->
-
-	<title>Крестики-Нолики</title>
-<style>
-
-body {
-	background-color: #d5f5ff;
-}
-
-p {
-	margin: 0;
-}
-
-#blockWraper table {
-	width: 500px;
-	height: 500px;
-	margin: 0 auto;
-	margin-top: 5px;
-	border-collapse: collapse;
-}
-
-#blockWraper td {
-	border: 2px solid black;
-	text-align: center;
-	font-size: 100pt;
-	cursor: pointer;
-	width: 160px;
-	height: 160px;
-}
-
-.trOne {
-	width: 33%;
-}
-
-.trTwo {
-	width: 33%;
-}
-
-.trThree {
-	width: 33%;
-
-}
-
-.nameTwo .playerOne {
-	display: none;
-}
-
-.nameOne .playerTwo {
-	display: none;
-}
-
-.playerOne {
-	width: 500px;
-	margin: 0 auto;
-	text-align: left;
-	font-size: 18pt;
-	color: red;
-}
-
-.playerTwo {
-	width: 500px;
-	margin: 0 auto;
-	text-align: right;
-	font-size: 18pt;
-	color: blue;
-}
-
-.btnWrap {
-	width: 500px;
-	margin: 0 auto;
-}
-
-.changeOne #btn {
-	color: red;
-	border: 1px solid red;
-}
-
-.changeTwo #btn {
-	color: blue;
-	border: 1px solid blue;
-}
-
-#btn {
-	width: 500px;
-	border-radius: 10px;
-	height: 40px;
-	margin-top: 5px;
-	text-align: center;
-	font-size: 20pt;
-	font-weight: 700;
-	cursor: pointer;
-}
-
-:focus {
-	outline: none;
-}
-
-.cross {
-	color: red;
-}
-
-.circle {
-	color: blue;
-}
-
-.cross {
-	border-color: red;
-}
-
-.circle {
-	border-color: blue;
-}
-
-</style>
+  <meta charset="utf-8">
+  <link type="text/css" rel="stylesheet" href="/normalize.css">
+  <link type="text/css" rel="stylesheet" href="/style.css">
+  <link href="https://fonts.googleapis.com/css?family=Comfortaa&amp;subset=cyrillic" rel="stylesheet">
+  <title>Крестики и нолики</title>
 </head>
 <body>
+  <div id="page">
+    <div id="container">
 
-<div id="blockWraper">
+      <div id="startPage" style="">
+        <p class="startGame" onclick="startGame()">Поиграть в крестики нолики</p>
+      </div>
 
-<div class="name nameOne">
-	<p class="playerOne">Игрок 1</p>
-	<p class="playerTwo">Игрок 2</p>
-</div>
+      <div id="endGame" style="display: none;">
+          <p class="whoWin"></p>
+          <p class="again" onclick="restartGame()">Сыграть ещё раз</p>
+      </div>
 
-<table class="table" collapse="0">
-<tr class="trOne">
-	<td class="td" data="11">
-	</td>
-	<td class="td" data="12">
-	</td>
-	<td class="td" data="13">
-	</td>
-</tr>
-<tr class="trTwo">
-	<td class="td" data="21">
-	</td>
-	<td class="td" data="22">
-	</td>
-	<td class="td" data="23">
-	</td>
-</tr>
-<tr class="trThree">
-	<td class="td" data="31">
-	</td>
-	<td class="td" data="32">
-	</td>
-	<td class="td" data="33">
-	</td>
-</tr>
-</table>
+      <div id="blockWraper" style="display: none;">
 
-<!-- <div class="btnWrap changeOne">
-	<button id="btn">
-		Я сходил!
-	</button>
-</div> -->
-<input type="hidden" name="player" data="one">
-<input type="hidden" name="field_11" data="0">
-<input type="hidden" name="field_12" data="0">
-<input type="hidden" name="field_13" data="0">
-<input type="hidden" name="field_21" data="0">
-<input type="hidden" name="field_22" data="0">
-<input type="hidden" name="field_23" data="0">
-<input type="hidden" name="field_31" data="0">
-<input type="hidden" name="field_32" data="0">
-<input type="hidden" name="field_33" data="0">
-</div>
-<script>
-$(document).ready(function(){
+      <div class="name nameOne">
+        <p class="whoPlayer">Ходит</p>
+      	<p class="playerOne">Первый игрок</p>
+      	<p class="playerTwo">Второй игрок</p>
+      </div>
+    </div>
+  </div>
+  <p class="copyright" style="display: none;">Сделано с любовью, руками не из плеч -> <a href="https://t.me/phlbt">PhlBt</a></p>
 
-	var cross = '<p class="cross">X</p>';
-	var circle = '<p class="circle">O</p>';
+  <script>
 
-	var winOne = false;
-	var winTwo = false;
-	var winAll = false;
+  // Проверка размеров экрана и установка значений ширины и высоты
 
-	var field_11 = $('input[name="field_11"]').attr('data') == '1';
+  var width = window.document.documentElement.clientWidth-40;
+  var height = window.document.documentElement.clientHeight-40;
 
+  var button = document.getElementsByClassName('startGame');
 
-	$('td').click(function() {
-		var choise = $('input[name="field_'+ $(this).attr('data') +'"]');
-		if ($('.table').attr('data') != 'end') {
-			if ($('input[name=player]').attr('data') == 'one') {
-				if ($(choise).attr('data') == 0) {
-					$(choise).attr('data', 1);
-					$(this).append(cross).addClass('crossTd');
-					$('.table').attr('data', 'end');
-				}
-			} else {
-				if ($(choise).attr('data') == 0) {
-					$(choise).attr('data', 2);
-					$(this).append(circle).addClass('circleTd');
-					$('.table').attr('data', 'end');
-				}
-			}
-			next();
-		} else {
-			alert('Вы сделали свой ход!');
-		}
+  function changeSize(){
+    document.getElementById('page').style.width = width + 'px';
+    document.getElementById('page').style.height = height + 'px';
+  }
+  changeSize();
 
-	});
+  var field = {
+    fields: {
+      f1: { 0: document.getElementsByClassName('td_11'),
+            1: document.getElementsByClassName('td_12'),
+            2: document.getElementsByClassName('td_13')},
+      f2: { 0: document.getElementsByClassName('td_21'),
+            1: document.getElementsByClassName('td_22'),
+            2: document.getElementsByClassName('td_23')},
+      f3: { 0: document.getElementsByClassName('td_31'),
+            1: document.getElementsByClassName('td_32'),
+            2: document.getElementsByClassName('td_33')}
+    },
 
-	function next() {
+    construct: function() {
+      field.check = {
+        f1: [0, 0, 0],
+        f2: [0, 0, 0],
+        f3: [0, 0, 0]
+      }
+      field.player = true;
+      field.winOne = false;
+      field.winTwo = false;
+      field.winAll = false;
 
-		checkWin();
+      field.createGame();
+    },
 
-		if (winOne === false && winTwo === false && winAll === false) {
-			if ($('input[name=player]').attr('data') == 'one') {
-				changePlayerOne();
-				$('.table').attr('data', 'ready');
-			} else {
-				changePlayerTwo();
-				$('.table').attr('data', 'ready');
-			}
-		} else if(winOne) {
-			setTimeout(newGame, 1000, 'Один');
-		} else if(winTwo) {
-			setTimeout(newGame, 1000, 'Два');
-		} else if(winAll) {
-			setTimeout(newGame, 1000);
-		}
-	}
+    game: {
+      0: {
+        0: 'trOne',
+        1: {  0: 'td_11',
+              1: 'td_12',
+              2: 'td_13' }
+      },
+      1: {
+        0: 'trTwo',
+        1:  { 0: 'td_21',
+              1: 'td_22',
+              2: 'td_23' }
+      },
+      2: {
+        0: 'trThree',
+        1:  { 0: 'td_31',
+              1: 'td_32',
+              2: 'td_33' }
+      }
+    },
 
-	function newGame(who) {
-		if(who == 'Один' || who == 'Два'){
-			alert('Победил игрок '+who+'');
-		}	else {
-			alert('Победила дружба');
-		}
-		restartGame();
-	}
+    createGame: function() {
+      field.changePlayer();
+      var game = field.game;
+      var table = document.createElement('table');
+      table.className = 'table';
+      table.setAttribute('collapse', 0);
+      for (var row in game) {
+        var tr = document.createElement('tr');
+        tr.className = game[row][0]
+        for (var el in game[row][1]) {
+          var td = document.createElement('td');
+          td.className = game[row][1][el];
+          tr.appendChild(td);
+        }
+        table.appendChild(tr);
+      }
+      document.getElementById('blockWraper').appendChild(table);
+      field.sizeGame();
+    },
 
-	function restartGame() {
-		window.location = location.href;
-	}
+    sizeGame: function() {
+      var sizeTable = (height < width) ? height : width ;
+      document.getElementsByClassName('table')[0].style.height = sizeTable-90+'px';
+      document.getElementsByClassName('table')[0].style.width = sizeTable-90+'px';
+      var td = document.getElementsByTagName('td');
+      for (var key in td) {
+        td[key].height = (document.getElementsByClassName('table')[0].clientHeight-12)/3;
+        td[key].width  = (document.getElementsByClassName('table')[0].clientWidth-12)/3;
+      }
+      field.bindForTd();
+    },
 
-	function checkWin() {
-		if ($('input[name="field_11"]').attr('data') == '1' && $('input[name="field_12"]').attr('data') == '1' && $('input[name="field_13"]').attr('data') == '1'
-			|| $('input[name="field_21"]').attr('data') == '1' && $('input[name="field_22"]').attr('data') == '1' && $('input[name="field_23"]').attr('data') == '1'
-			|| $('input[name="field_31"]').attr('data') == '1' && $('input[name="field_32"]').attr('data') == '1' && $('input[name="field_33"]').attr('data') == '1'
-			|| $('input[name="field_11"]').attr('data') == '1' && $('input[name="field_21"]').attr('data') == '1' && $('input[name="field_31"]').attr('data') == '1'
-			|| $('input[name="field_12"]').attr('data') == '1' && $('input[name="field_22"]').attr('data') == '1' && $('input[name="field_32"]').attr('data') == '1'
-			|| $('input[name="field_13"]').attr('data') == '1' && $('input[name="field_23"]').attr('data') == '1' && $('input[name="field_33"]').attr('data') == '1'
-			|| $('input[name="field_11"]').attr('data') == '1' && $('input[name="field_22"]').attr('data') == '1' && $('input[name="field_33"]').attr('data') == '1'
-			|| $('input[name="field_13"]').attr('data') == '1' && $('input[name="field_22"]').attr('data') == '1' && $('input[name="field_31"]').attr('data') == '1') {
-			winOne = true;
-		} else if ($('input[name="field_11"]').attr('data') == '2' && $('input[name="field_12"]').attr('data') == '2' && $('input[name="field_13"]').attr('data') == '2'
-				|| $('input[name="field_21"]').attr('data') == '2' && $('input[name="field_22"]').attr('data') == '2' && $('input[name="field_23"]').attr('data') == '2'
-				|| $('input[name="field_31"]').attr('data') == '2' && $('input[name="field_32"]').attr('data') == '2' && $('input[name="field_33"]').attr('data') == '2'
-				|| $('input[name="field_11"]').attr('data') == '2' && $('input[name="field_21"]').attr('data') == '2' && $('input[name="field_31"]').attr('data') == '2'
-				|| $('input[name="field_12"]').attr('data') == '2' && $('input[name="field_22"]').attr('data') == '2' && $('input[name="field_32"]').attr('data') == '2'
-				|| $('input[name="field_13"]').attr('data') == '2' && $('input[name="field_23"]').attr('data') == '2' && $('input[name="field_33"]').attr('data') == '2'
-				|| $('input[name="field_11"]').attr('data') == '2' && $('input[name="field_22"]').attr('data') == '2' && $('input[name="field_33"]').attr('data') == '2'
-				|| $('input[name="field_13"]').attr('data') == '2' && $('input[name="field_22"]').attr('data') == '2' && $('input[name="field_31"]').attr('data') == '2') {
-			winTwo = true;
-		} else if ($('input[name="field_11"]').attr('data') != '0' && $('input[name="field_12"]').attr('data') != '0' && $('input[name="field_13"]').attr('data') != '0'
-				&& $('input[name="field_21"]').attr('data') != '0' && $('input[name="field_22"]').attr('data') != '0' && $('input[name="field_23"]').attr('data') != '0'
-				&& $('input[name="field_31"]').attr('data') != '0' && $('input[name="field_32"]').attr('data') != '0' && $('input[name="field_33"]').attr('data') != '0'
-				&& $('input[name="field_11"]').attr('data') != '0' && $('input[name="field_21"]').attr('data') != '0' && $('input[name="field_31"]').attr('data') != '0'
-				&& $('input[name="field_12"]').attr('data') != '0' && $('input[name="field_22"]').attr('data') != '0' && $('input[name="field_32"]').attr('data') != '0'
-				&& $('input[name="field_13"]').attr('data') != '0' && $('input[name="field_23"]').attr('data') != '0' && $('input[name="field_33"]').attr('data') != '0'
-				&& $('input[name="field_11"]').attr('data') != '0' && $('input[name="field_22"]').attr('data') != '0' && $('input[name="field_33"]').attr('data') != '0'
-				&& $('input[name="field_13"]').attr('data') != '0' && $('input[name="field_22"]').attr('data') != '0' && $('input[name="field_31"]').attr('data') != '0') {
-			winAll = true;
-		}
-	}
+    bindForTd: function() {
+      var targetForClick = document.getElementsByTagName('td');
+      for (var targetField in targetForClick) {
+        targetForClick[targetField].onclick = function(e) {
+          field.doStep(e.target);
+        }
+      }
+    },
+    unBindForTd: function(el) {
+      el.className = el.className + ' default';
+      el.onclick = function() {};
+    },
+    doStep: function(el) {
+      field.addCheck(el);
+      field.player ? field.addCircle(el) : field.addCross(el) ;
+      if (field.checkWinner()){
+        field.congratsWinner()
+      } else {
+        field.unBindForTd(el);
+        field.changePlayer();
+      }
+    },
+    changePlayer: function(){
+        document.getElementsByClassName('name')[0].className = field.player ? 'name nameOne' : 'name nameTwo' ;
+        field.player = !field.player;
+    },
+    addCross: function(el) {
+      var newImg = document.createElement('img');
+      newImg.setAttribute('src', '/img/cross.png');
+      newImg.setAttribute('width', el.clientWidth-5);
+      el.appendChild(newImg);
+    },
+    addCircle: function(el) {
+      var newImg = document.createElement('img');
+      newImg.setAttribute('src', '/img/circle.png');
+      newImg.setAttribute('width', el.clientWidth-5);
+      el.appendChild(newImg);
+    },
+    addCheck: function(el) {
+      for (var i in field.fields) {
+        for (var k in field.check) {
+          for (e=0;e<field.check[k].length;e++) {
+            if (field.fields[i][e][0] == el) {
+              field.check[i][e] = field.player ? 1 : 2 ;
+            }
+          }
+        }
+      }
+    },
+    checkWinner: function() {
+      pl = field.player ? 1 : 2 ;
 
-	function changePlayerOne() {
-		$('.name').removeClass('nameOne').addClass('nameTwo');
-		$('.btnWrap').removeClass('changeOne').addClass('changeTwo');
-		$('input[name=player]').attr('data', 'two');
-	}
+      if (field.check.f1[0] == pl) {
+        if (field.check.f1[2] == pl) {
+          if (field.check.f1[1] == pl) {
+            return true;
+          }
+        }
+        if (field.check.f3[0] == pl) {
+          if (field.check.f2[0] == pl) {
+            return true;
+          }
+        }
+        if (field.check.f3[2] == pl) {
+          if (field.check.f2[1] ==pl) {
+            return true;
+          }
+        }
+      }
+      if (field.check.f3[2] == pl) {
+        if (field.check.f1[2] == pl) {
+          if (field.check.f2[2] == pl) {
+            return true;
+          }
+        }
+        if (field.check.f3[0] == pl) {
+          if (field.check.f3[1] == pl) {
+            return true;
+          }
+        }
+      }
+      if (field.check.f2[1] == pl) {
+        if (field.check.f1[2] == pl) {
+          if (field.check.f3[0] == pl) {
+            return true;
+          }
+        }
+        if (field.check.f1[1] == pl) {
+          if (field.check.f3[1] == pl) {
+            return true;
+          }
+        }
+        if (field.check.f2[0] == pl) {
+          if (field.check.f2[2] == pl) {
+            return true;
+          }
+        }
+      }
+      field.checkDraw();
+    },
+    checkDraw: function() {
+      var draw = 0;
+      for (var obj in field.check ) {
+        draw += +field.check[obj].every(function(i){ return i!=0 });
+      }
+      if (draw == 3) {
+        field.draw();
+      } else {
+        return false;
+      }
+    },
+    congrats: function() {
+      if (!field.player) {
+        field.congratsWinnerOne();
+      } else {
+        field.congratsWinnerTwo();
+      }
+    },
+    congratsWinner: function() {
+      for (var k in field.fields){
+        for (var e in field.fields[k]){
+          field.unBindForTd(field.fields[k][e][0]);
+        }
+      }
+      setTimeout(function(){field.congrats();}, 2000);
+    },
+    congratsWinnerOne: function() {
+      document.getElementById('blockWraper').style = 'display: none;';
+      document.getElementsByClassName('whoWin')[0].innerHTML = 'Победил первый игрок';
+      document.getElementById('endGame').style = 'display: block;';
+      document.getElementsByClassName('copyright')[0].style = 'display: block;';
+    },
+    congratsWinnerTwo: function() {
+      document.getElementById('blockWraper').style = 'display: none;';
+      document.getElementsByClassName('whoWin')[0].innerHTML = 'Победил второй игрок';
+      document.getElementById('endGame').style = 'display: block;';
+      document.getElementsByClassName('copyright')[0].style = 'display: block;';
+    },
+    draw: function() {
+      document.getElementById('blockWraper').style = 'display: none;';
+      document.getElementsByClassName('whoWin')[0].innerHTML = 'Победила дружба';
+      document.getElementById('endGame').style = 'display: block;';
+      document.getElementsByClassName('copyright')[0].style = 'display: block;';
+    }
+  }
 
-	function changePlayerTwo() {
-		$('.name').removeClass('nameTwo').addClass('nameOne');
-		$('.btnWrap').removeClass('changeTwo').addClass('changeOne');
-		$('input[name=player]').attr('data', 'one');
-	}
+  function startGame() {
+    document.getElementById('startPage').style = 'display: none;';
+    document.getElementById('endGame').style = 'display: none;';
+    document.getElementsByClassName('copyright')[0].style = 'display: none;';
+    document.getElementById('blockWraper').style = 'display: block;';
 
-});
-</script>
+    var game = new field.construct();
+  }
+  function restartGame(){
+    document.getElementsByClassName('table')[0].remove();
+    startGame();
+  }
+  </script>
 </body>
 </html>
